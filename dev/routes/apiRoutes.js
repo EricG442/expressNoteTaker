@@ -2,7 +2,7 @@ const router = require('express').Router();
 const store = require('../db/store.js');
 
 router.get('/notes', (req, res) => {
-    store.getNotes(res);
+    store.getNotes().then(data => res.json(data));
 });
 
 router.post('/notes', (req, res) => {

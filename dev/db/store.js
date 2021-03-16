@@ -21,10 +21,12 @@ class Store {
         return writeFileAsync(dbPath, content);
     }
 
-    getNotes(res) {
-        this
-            .read()
-            .then(data => res.json(JSON.parse(data)));
+    getNotes() {
+        return this
+                .read()
+                .then(data => {
+                    return data ? JSON.parse(data) : [];
+                });
     }
 
     saveNotes(notes) {
