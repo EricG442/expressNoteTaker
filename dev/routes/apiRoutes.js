@@ -6,7 +6,9 @@ router.get('/notes', (req, res) => {
 });
 
 router.post('/notes', (req, res) => {
-    
+    const notes = this.read();
+
+    console.log(notes);
 });
 
 router.delete('/notes/:id', (req, res) => {
