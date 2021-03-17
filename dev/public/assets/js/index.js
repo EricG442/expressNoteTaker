@@ -27,6 +27,7 @@ const deleteNote = id => {
 };
 
 const renderNoteText = note => {
+    // check if theres an id givin to the method, if not set the value or text content of the note title and note body
     if(note.id) {
         noteTitle.val(note.title);
         noteText.val(note.text);
@@ -37,12 +38,15 @@ const renderNoteText = note => {
 };
 
 const handleRender = function() {
+    // using 'this' syntax to get the note title and body in the data attribute then render the note
     let newNote = $(this).data();
     renderNoteText(newNote);
 };
 
 const handleSaveNote = () => {
- 
+    
+    // checking if the note title is not empty, if it is it just logs an error to the console, need to complete it a bit more
+    // if the note title is not empty call the method using the note as a parameter to send a POST request with ajax
     if(noteTitle.val().trim()) {
         let params = {
             title: noteTitle.val(),
@@ -61,18 +65,22 @@ const handleSaveNote = () => {
 const handleDelNote = function (e) {
     e.stopPropagation();
 
+    // using 'this' syntax again to get the parent elements data attribute using jquery, 
+    //then give the id property to the deleteNote method to send a DELETE request using ajax
     let parent = $(this).parent().data();
-    // need to finish handling the delete event later finally have something that responds is better
-    // this will call the deleteNote funtion and send a POST request and i will finish that later
     deleteNote(parent.id);
 
+    // finally display notes
     getAndRender();
 };
 
 const renderNoteList = notes => {
+    // empty the note list container and set up a new array for the forEach method to input into
     listContainer.empty();
     let listItems = [];
 
+    // this method is used to create the html elements to use and append to the page, needs a title parameter and withDelBtn is true 
+    // by default and appends a delete button to the list item
     const createLi = (title, withDelBtn = true) => {
         let li = $("<li class='list-group-item'>"),
             span = $("<span>").text(title);
@@ -86,6 +94,8 @@ const renderNoteList = notes => {
         return li
     };
 
+    // uses the array passed to the method and for each index use the above method 'createLi' and set the data attribute to the index contents
+    // finally push the new html element to the array to then have the array be appended to the container
     notes.forEach( note => {
         const card = createLi(note.title).data(note);
         listItems.push(card);

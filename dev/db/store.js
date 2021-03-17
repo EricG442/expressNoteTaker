@@ -3,8 +3,10 @@ const fs = require('fs');
 const util = require('util');
 const {v1: uuidv1} = require('uuid');
 
+// getting the db.json file path here so that there a no scope issues within the Store class
 const dbPath = path.join(__dirname, './db.json');
 
+// creating new methods of the readFile and writeFile from the fs package which returns a promise
 const readFileAsync = util.promisify(fs.readFile);
 const writeFileAsync = util.promisify(fs.writeFile);
 
