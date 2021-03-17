@@ -1,8 +1,4 @@
 const express = require('express');
-const path = require('path');
-
-const pubDIR = path.join(__dirname, './public');
-
 
 const htmlRoutes = require('./routes/htmlRoutes.js');
 const apiRoutes = require('./routes/apiRoutes.js');
@@ -15,7 +11,7 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 
-app.use(express.static(pubDIR));
+app.use('/static', express.static('public'));
 
 app.use('/api', apiRoutes);
 app.use(htmlRoutes);

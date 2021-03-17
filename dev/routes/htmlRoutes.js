@@ -1,8 +1,8 @@
 const router = require('express').Router();
 const path = require('path');
 
-const sendFile = (res, filePath) => {
-    res.sendFile(path.join(__dirname, filePath));
+const sendFile = (response, filePath) => {
+    response.sendFile(path.join(__dirname, filePath));
 };
 
 router.get('/', (req, res) => {

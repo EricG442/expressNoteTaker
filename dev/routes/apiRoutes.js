@@ -6,7 +6,7 @@ router.get('/notes', (req, res) => {
 });
 
 router.post('/notes', (req, res) => {
-    store.addNote();
+    
 });
 
 router.delete('/notes/:id', (req, res) => {
