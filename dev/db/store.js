@@ -30,17 +30,27 @@ class Store {
     }
 
     saveNotes(notes) {
-
+        return this.write(JSON.stringify(notes))
     }
 
     addNote(note) {
-        const db = this.read();
+        return this
+                .getNotes()
+                .then(data => {
+                    const newNote = {...note, id: uuidv1()}
+                    data.push(newNote);
 
-        console.log(db);
+                    return this.saveNotes(data);
+                })
     }
 
     deleteNote(noteID) {
-
+        return this
+                .getNotes()
+                .then(data => {
+                    const list = data.filter(note => note.id !== noteID);
+                    this.saveNotes(list);
+                })
     }
 };
 

@@ -6,9 +6,10 @@ router.get('/notes', (req, res) => {
 });
 
 router.post('/notes', (req, res) => {
-    const notes = this.read();
-
-    console.log(notes);
+    store
+        .addNote(req.body)
+        .then(data => res.json(data))
+        .catch( err => res.status(500).json(err) )
 });
 
 router.delete('/notes/:id', (req, res) => {

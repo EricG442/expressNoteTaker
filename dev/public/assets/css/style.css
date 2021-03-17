@@ -30,3 +30,15 @@ body {
     height: calc(100% - 50px);
     width: 100%;
 }
+
+.delete-note {
+    width: 20px;
+    height: 20px;
+}
+
+#saveBtn, #newNoteBtn {
+    padding: 0px 0px;
+    margin-right: 5px;
+    width: 20px;
+    height: 20px;
+}

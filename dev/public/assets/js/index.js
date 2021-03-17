@@ -1,5 +1,7 @@
 const saveButton = $('#saveBtn'),
-    listContainer = $('#list-container');
+    listContainer = $('#list-container'),
+    noteTitle = $('.note_title'),
+    noteText = $('.note_textarea');
 
 const getNotes = () => {
     return $.ajax({
@@ -23,7 +25,35 @@ const deleteNote = id => {
     });
 };
 
-const renderNoteList = (notes) => {
+const handleSaveNote = () => {
+ 
+    if(noteTitle.val().trim()) {
+        let params = {
+            title: noteTitle.val(),
+            text: noteText.val()
+        }
+        
+        saveNotes(params);
+    }else {
+        // some type of error handling response needs to go here
+        console.log('need a note title to save');
+    }
+
+    getAndRender();
+};
+
+const handleDelNote = function (e) {
+    e.stopPropagation();
+
+    let parent = $(this).parent().data();
+    // need to finish handling the delete event later finally have something that responds is better
+    // this will call the deleteNote funtion and send a POST request and i will finish that later
+    deleteNote(parent.id);
+
+    getAndRender();
+};
+
+const renderNoteList = notes => {
     listContainer.empty();
     let listItems = [];
 
@@ -34,7 +64,7 @@ const renderNoteList = (notes) => {
         li.append(span);
 
         if(withDelBtn) {
-            let delBtn = $("<i class='fas fa-trash-alt float-right text-danger>");
+            let delBtn = $("<i class='fas fa-trash-alt text-danger delete-note' style='float: right;'>");
             li.append(delBtn);
         }
         return li
@@ -52,5 +82,7 @@ const getAndRender = () => {
     return getNotes().then(renderNoteList);
 };
 
-saveButton.on('click', getNotes());
+listContainer.on('click', '.delete-note', handleDelNote);
+saveButton.on('click', handleSaveNote);
+
 getAndRender();
