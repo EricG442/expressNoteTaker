@@ -1,7 +1,8 @@
 const saveButton = $('#saveBtn'),
     listContainer = $('#list-container'),
     noteTitle = $('.note_title'),
-    noteText = $('.note_textarea');
+    noteText = $('.note_textarea'),
+    newNoteBtn = $('#newNoteBtn');
 
 const getNotes = () => {
     return $.ajax({
@@ -23,6 +24,25 @@ const deleteNote = id => {
         url: 'api/notes/' + id,
         method: 'DELETE'
     });
+};
+
+const renderNoteText = note => {
+    if(note.id) {
+        noteTitle.val(note.title);
+        noteText.val(note.text);
+    }else {
+        noteTitle.val('');
+        noteText.val('');
+    }
+};
+
+const handleRender = function() {
+    let newNote = $(this).data();
+    renderNoteText(newNote);
+};
+
+const renderNewNote = () => {
+    renderNoteText();
 };
 
 const handleSaveNote = () => {
@@ -82,6 +102,8 @@ const getAndRender = () => {
     return getNotes().then(renderNoteList);
 };
 
+newNoteBtn.on('click', renderNoteText);
+listContainer.on('click', '.list-group-item', handleRender);
 listContainer.on('click', '.delete-note', handleDelNote);
 saveButton.on('click', handleSaveNote);
 
