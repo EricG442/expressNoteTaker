@@ -41,10 +41,6 @@ const handleRender = function() {
     renderNoteText(newNote);
 };
 
-const renderNewNote = () => {
-    renderNoteText();
-};
-
 const handleSaveNote = () => {
  
     if(noteTitle.val().trim()) {
