@@ -18,5 +18,5 @@ app.use(htmlRoutes);
 
 app.listen(PORT, (err) => {
     if(err) {console.log(err)}
-    else {console.log(`Listening to port: ${PORT}`)}
+    else {console.log(`Listening to port: ${PORT} \nhttp://localhost:3000`)}
 })

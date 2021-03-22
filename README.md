@@ -15,11 +15,24 @@ Note taking application in the web browser using express.js to create, save and 
 
 ## Installation
 
-Clone the repo i dont know
+Node.js is required to use this application.
+
+First clone the repository onto your system then run in the root directory
+```
+npm i --production
+```
 
 ## Usage
 
-Enter some text in the title input area and enter the body of the notes in the text area, you must have a note title in order to use the save button. The button to the right of the save button will empty all text in both the note title and body and the trash button will delete notes from the database
+After installation is finished run
+```
+node dev/server.js
+```
+to start the Express server
+
+the server is listening 'localhost:3000' by default
+
+Once to the home page you can press the 'Get Started' button to get redirected to '/notes'. Once on the 'notes' page you will be able to create, delete and save notes as well as update them to the file 'db.json' in the /dev/db/ folder
 
 ## License
 
